@@ -49,9 +49,9 @@ wss.on("connection", (ws, req) => {
         }
 
         // UPLOAD DATA CHUNK
-        else if (Buffer.isBuffer(msg)) {
-            ws.uploadBytes += msg.length;
-        }
+        else if (Buffer.isBuffer(msg) || msg instanceof Uint8Array) {
+    ws.uploadBytes += msg.length ?? msg.byteLength;
+}
 
         // END UPLOAD
         else if (text === "speed_upload_end") {
